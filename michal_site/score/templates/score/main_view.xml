@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Michal Score Page</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand" href="/">Rozwal to scores</a>
+      </nav>
+      <header class="mt-4">
+
+      </header>
+      <main>
+         <div class="card mt-4">
+           {% for user in users %}
+          <div class="card-body">
+            <h5 class="card-title">User Name</h5>
+            <h6 class="card-subtitle mb-2 text-muted"> {{ user.name }} </h6>
+            <p class="card-text">
+              <strong>Score:</strong> {{ user.score }}
+            </p>
+          </div>
+           {% endfor %}
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

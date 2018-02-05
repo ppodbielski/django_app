@@ -1,0 +1,18 @@
+FROM centos:centos7
+# ARG for settings.py file
+#ARG ALLOWED_HOST_TABLE="ALLOWED_HOSTS = ['192.168.0.103', 'localhost', '127.0.0.1']"
+
+# Install essential
+RUN yum -y update; yum clean all
+RUN yum -y install epel-release 
+RUN yum -y install python36 python34-setuptools; yum clean all
+RUN easy_install-3.4 pip
+# Prepare env
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip3 install -r requirements.txt
+# Add source code
+ADD michal_site /code/
+
+ENTRYPOINT celery -A michal_site.celery worker --loglevel=info
