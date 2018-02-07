@@ -1,5 +1,5 @@
-rozwal_to - django app - reading data from rozwalto webpage. It is require to write username in admin panel
-Celery used as worker and beat
+rozwal_to - django app - reading data from rozwalto webpage. It is require to write username in admin panel <br />
+Celery used as worker and beat <br />
 
 docker build -f Django_Server -t django/score_app:01 . 
 docker build -f Celery_Worker -t django/celery_worker:01 . 
