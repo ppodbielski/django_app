@@ -117,15 +117,11 @@ USE_TZ = True
 
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
-
+BROKER_URL = 'amqp://guest:guest@rabbit-server:5672//'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
