@@ -59,7 +59,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'michal_site.wsgi.application'
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -71,13 +71,14 @@ DATABASES = {
     }
 }
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-"""
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -113,9 +114,15 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
+#STATICFILES_DIRS = [
+#    #os.path.join(BASE_DIR, "/home/pawel/PycharmProjects/django_app/rozwal_to/michal_site/score/templates/score"),
+#os.path.join(BASE_DIR, "/root/score/templates/score"),
+#]
+
+
 BROKER_URL = 'amqp://guest:guest@rabbit-server:5672//'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
