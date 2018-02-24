@@ -1,0 +1,7 @@
+FROM nginx:1.13
+#RUN mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.org
+#COPY nginx.conf /etc/nginx/nginx.conf
+ADD nginx.conf /etc/nginx/nginx.conf
+RUN mkdir -p /var/www/static
+WORKDIR /var/www/static
+RUN chown -R www-data:www-data /var/www/static

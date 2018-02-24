@@ -8,7 +8,6 @@ RUN yum -y update ;\
     yum clean all ;\ 
     yum -y install python36 \
     python34-setuptools \
-    nginx; \ 
     yum clean all
 
 RUN easy_install-3.4 pip

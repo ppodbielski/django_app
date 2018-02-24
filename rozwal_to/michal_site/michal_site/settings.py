@@ -59,7 +59,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'michal_site.wsgi.application'
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+"""
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -111,6 +111,36 @@ USE_L10N = True
 
 USE_TZ = True
 
+"""
+
+# Static files finders
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'yarn.finders.YarnFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
+
+STATIC_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
+NODE_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'node_modules')
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_DIRS = [
+    STATIC_COMPONENTS_ROOT,
+    NODE_COMPONENTS_ROOT
+]
+
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'fixtures')
+]
+
+STATIC_ROOT = os.environ['STATIC_DIR']
+STATIC_URL = '/static/
+
+"""
+
+
+
 
 
 STATIC_URL = '/static/'
@@ -118,7 +148,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 
 #STATICFILES_DIRS = [
-#    #os.path.join(BASE_DIR, "/home/pawel/PycharmProjects/django_app/rozwal_to/michal_site/score/templates/score"),
+#os.path.join(BASE_DIR, "score/templates/score"),
 #os.path.join(BASE_DIR, "/root/score/templates/score"),
 #]
 
