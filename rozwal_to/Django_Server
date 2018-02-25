@@ -20,4 +20,4 @@ RUN pip3 install -r root/requirements.txt
 EXPOSE 8000
 
 ENTRYPOINT ["./root/start_app.sh"]
-
+CMD []

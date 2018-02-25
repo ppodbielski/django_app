@@ -156,11 +156,16 @@ STATICFILES_FINDERS = (
 #]
 
 
-BROKER_URL = 'amqp://guest:guest@rabbit-server:5672//'
+BROKER_URL = 'amqp://guest:guest@rabbit:5672//'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Warsaw'
+
+CELERY_DEFAULT_QUEUE = 'rozwal_toen'
+CELERY_DEFAULT_EXCHANGE = 'rozwal_to'
+CELERY_DEFAULT_ROUTING_KEY = 'rozwal_to'
+
 
 CELERYBEAT_SCHEDULE = {
     'task-test': {
