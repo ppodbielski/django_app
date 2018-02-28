@@ -2,12 +2,22 @@ FROM centos:centos7
 
 # Install essential
 
+ARG RABBIT='rabbit'
+ARG RABBIT_PORT='5672'
+ARG DATABASE='db'
+ARG DATABASE_PORT='5432'
+ENV DATABASE=${DATABASE} \
+    DATABASE_PORT=${DATABASE_PORT} \
+    RABBIT=${RABBIT} \
+    RABBIT_PORT=${RABBIT_PORT} 
+
 RUN yum -y update ;\
     yum clean all ;\
     yum -y install epel-release ;\
     yum clean all ;\ 
     yum -y install python36 \
     python34-setuptools \
+    nc \
     yum clean all
 
 RUN easy_install-3.4 pip

@@ -1,37 +1,57 @@
 #!/bin/bash
 docker rm -f db django nginx rabbit worker beat
 
-docker run -d --name db \
---hostname db \
--e POSTGRES_PASSWORD=postgres \
--e POSTGRES_USER=postgres \
--e POSTGRES_DB=michal_site \
---network django_network \
-postgres:10
+DOCKER_NETWORK=django_network
 
-sleep 5
+DB_PASSWORD=postgres
+DB_USER=postgres
+DB_DB=michal_site
+DB_NAME=db
+DB_IMAGE=postgres:10
 
-docker run -d --network django_network \
---name django \
+APP_IMAGE=django/score_app:01
+APP_NAME=django
+APP_RUN=app
+CELERY_WORKER=worker
+CELERY_WORKER_RUN=worker
+CELERY_BEAT=beat
+CELERY_BEAT_RUN=beat
+
+NGINX_IMAGE=nginx-reverse:01
+NGINX_NAME=nginx
+NGINX_PORT=80
+
+RABBIT_NAME=rabbit
+RABBIT_IMAGE=rabbitmq:3.7-management
+RABBIT_PORT=15672
+
+docker run -d --name ${DB_NAME} \
+-e POSTGRES_PASSWORD=${DB_PASSWORD} \
+-e POSTGRES_USER=${DB_USER} \
+-e POSTGRES_DB=${DB_DB} \
+--network ${DOCKER_NETWORK} \
+${DB_IMAGE}
+
+docker run -d --network ${DOCKER_NETWORK} \
+--name ${APP_NAME} \
 -v /home/pawel/PycharmProjects/django_app/rozwal_to/static_files:/root/static \
-django/score_app:01 app
+${APP_IMAGE} ${APP_RUN}
 
-
-docker run -d --network django_network \
---name nginx \
--p 80:80 \
+docker run -d --network ${DOCKER_NETWORK} \
+--name ${NGINX_NAME} \
+-p ${NGINX_PORT}:80 \
 -v /home/pawel/PycharmProjects/django_app/rozwal_to/static_files:/var/www/static \
-nginx-reverse:01
+${NGINX_IMAGE}
 
-docker run -d --name rabbit \
--p 15672:15672 \
---network django_network \
-rabbitmq:3.7-management
+docker run -d --name ${RABBIT_NAME} \
+-p ${RABBIT_PORT}:15672 \
+--network ${DOCKER_NETWORK} \
+${RABBIT_IMAGE}
 
-docker run -d --network django_network \
---name worker \
-django/score_app:01 beat
+docker run -d --network ${DOCKER_NETWORK} \
+--name ${CELERY_WORKER} \
+${APP_IMAGE} ${CELERY_WORKER_RUN}
 
-docker run -d --network django_network \
---name beat \
-django/score_app:01 worker
+docker run -d --network ${DOCKER_NETWORK} \
+--name ${CELERY_BEAT} \
+${APP_IMAGE} ${CELERY_BEAT_RUN}

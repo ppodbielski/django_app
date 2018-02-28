@@ -1,22 +1,12 @@
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '5v$#77gkhajv5vsbwz)0oh_o4$(kdscp3s%3jny*_divmvc_v8'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,7 +16,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'score',
-
 ]
 
 MIDDLEWARE = [
@@ -59,28 +48,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'michal_site.wsgi.application'
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'michal_site',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
-}
-"""
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-"""
-# Password validation
-# https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -97,51 +70,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Warsaw'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
-"""
-
-# Static files finders
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'yarn.finders.YarnFinder',
-    'pipeline.finders.PipelineFinder',
-)
-
-
-STATIC_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'static')
-NODE_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'node_modules')
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-STATICFILES_DIRS = [
-    STATIC_COMPONENTS_ROOT,
-    NODE_COMPONENTS_ROOT
-]
-
-FIXTURE_DIRS = [
-    os.path.join(BASE_DIR, 'fixtures')
-]
-
-STATIC_ROOT = os.environ['STATIC_DIR']
-STATIC_URL = '/static/
-
-"""
-
-
-
-
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
@@ -149,12 +82,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
-#STATICFILES_DIRS = [
-#os.path.join(BASE_DIR, "score/templates/score"),
-#os.path.join(BASE_DIR, "/root/score/templates/score"),
-#]
-
 
 BROKER_URL = 'amqp://guest:guest@rabbit:5672//'
 CELERY_ACCEPT_CONTENT = ['application/json']
@@ -165,7 +92,6 @@ CELERY_TIMEZONE = 'Europe/Warsaw'
 CELERY_DEFAULT_QUEUE = 'rozwal_toen'
 CELERY_DEFAULT_EXCHANGE = 'rozwal_to'
 CELERY_DEFAULT_ROUTING_KEY = 'rozwal_to'
-
 
 CELERYBEAT_SCHEDULE = {
     'task-test': {
