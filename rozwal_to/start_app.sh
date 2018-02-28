@@ -8,8 +8,9 @@ if [[ "$USE" == "app" ]]; then
 	while ! nc -w 1 --send-only ${DATABASE} ${DATABASE_PORT} < /dev/null; do sleep 3; done;
 	python3 ${HOME}/manage.py makemigrations score
 	python3 ${HOME}/manage.py migrate
-	python3 ${HOME}/manage.py collectstatic
+	python3 ${HOME}/manage.py collectstatic --noinput
 	cd root
+	/bin/bash
 	gunicorn --bind 0.0.0.0:8000 michal_site.wsgi
 fi
 
