@@ -2,14 +2,27 @@ FROM centos:centos7
 
 # Install essential
 
-ARG RABBIT='rabbit'
+
+ARG DB_PASSWORD='postgres'
+ARG DB_USER='postgres'
+ARG DB_NAME='michal_site'
+ARG DB_HOST='db'
+ARG DB_PORT='5432'
+
+ARG RABBIT_NAME='guest'
+ARG RABBIT_PASSWORD='guest'
 ARG RABBIT_PORT='5672'
-ARG DATABASE='db'
-ARG DATABASE_PORT='5432'
-ENV DATABASE=${DATABASE} \
-    DATABASE_PORT=${DATABASE_PORT} \
-    RABBIT=${RABBIT} \
-    RABBIT_PORT=${RABBIT_PORT} 
+ARG RABBIT_HOST='rabbit'
+
+ENV DB_PASSWORD=${DB_PASSWORD} \
+    DB_USER=${DB_USER} \
+    DB_NAME=${DB_NAME} \
+    DB_HOST=${DB_HOST} \
+    DB_PORT=${DB_PORT} \
+    RABBIT_NAME=${RABBIT_NAME} \
+    RABBIT_PASSWORD=${RABBIT_PASSWORD} \
+    RABBIT_PORT=${RABBIT_PORT} \
+    RABBIT_HOST=${RABBIT_HOST}
 
 RUN yum -y update ;\
     yum clean all ;\

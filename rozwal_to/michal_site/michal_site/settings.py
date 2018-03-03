@@ -4,6 +4,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '5v$#77gkhajv5vsbwz)0oh_o4$(kdscp3s%3jny*_divmvc_v8'
 
+
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
@@ -51,11 +52,11 @@ WSGI_APPLICATION = 'michal_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'michal_site',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME',''),
+        'USER': os.environ.get('DB_USER',''),
+        'PASSWORD': os.environ.get('DB_PASSWORD',''),
+        'HOST': os.environ.get('DB_HOST',''),
+        'PORT': os.environ.get('DB_PORT',''),
     }
 }
 
@@ -87,7 +88,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-BROKER_URL = 'amqp://guest:guest@rabbit:5672//'
+BROKER_URL = 'amqp://' + os.environ.get('RABBIT_NAME','') + ':' + os.environ.get('RABBIT_PASSWORD','') + '@rabbit:' + os.environ.get('RABBIT_PORT','') + '//'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
