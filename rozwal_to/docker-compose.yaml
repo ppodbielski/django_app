@@ -1,0 +1,56 @@
+version: '3'
+services:  
+
+  db:
+    image: ${DB_IMAGE}
+    container_name: ${DB_NAME}
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+
+  rabbit: 
+    image: ${RABBIT_IMAGE}
+    container_name: ${RABBIT_NAME}
+    ports: 
+      - ${RABBIT_PORT}:15672 
+  
+  web:
+    build:
+      context: .
+      dockerfile: Django_Server
+    image: ${APP_IMAGE}
+    container_name: ${APP_NAME}
+    command: ${APP_RUN}
+    depends_on:
+      - db
+    volumes:
+      - ./static_files:/root/static    
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Nginx
+    image : ${NGINX_IMAGE}
+    container_name: ${NGINX_NAME}
+    ports:
+      - ${NGINX_PORT}:8000
+    volumes:
+      - ./static_files:/var/www/static
+    depends_on:
+      - web
+  
+  worker:
+    image: ${APP_IMAGE}
+    container_name: ${CELERY_WORKER}
+    command: ${CELERY_WORKER_RUN}
+    depends_on:
+      - rabbit
+      - web
+  beat:
+    image: ${APP_IMAGE}
+    container_name: ${CELERY_BEAT}
+    command: ${CELERY_BEAT_RUN}
+    depends_on:
+      - rabbit
+      - web
