@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_USER=${DB_USER}
-      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_DB=${DB_DB}
 
   rabbit: 
     image: ${RABBIT_IMAGE}
@@ -34,7 +34,7 @@ services:
     image : ${NGINX_IMAGE}
     container_name: ${NGINX_NAME}
     ports:
-      - ${NGINX_PORT}:8000
+      - ${NGINX_PORT}:80
     volumes:
       - ./static_files:/var/www/static
     depends_on:

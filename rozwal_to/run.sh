@@ -9,7 +9,7 @@ DB_DB=michal_site
 DB_NAME=db
 DB_IMAGE=postgres:10
 
-APP_IMAGE=django/score_app:01
+APP_IMAGE=django_score_app:01
 APP_NAME=django
 APP_RUN=app
 CELERY_WORKER=worker
@@ -17,7 +17,7 @@ CELERY_WORKER_RUN=worker
 CELERY_BEAT=beat
 CELERY_BEAT_RUN=beat
 
-NGINX_IMAGE=nginx-reverse:01
+NGINX_IMAGE=nginx_reverse:01
 NGINX_NAME=nginx
 NGINX_PORT=80
 
