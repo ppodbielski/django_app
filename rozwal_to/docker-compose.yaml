@@ -25,7 +25,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./static_files:/root/static    
+      - ./static:/root/collected_static 
 
   nginx:
     build:
@@ -36,7 +36,7 @@ services:
     ports:
       - ${NGINX_PORT}:80
     volumes:
-      - ./static_files:/var/www/static
+      - ./static:/var/www/static
     depends_on:
       - web
   
