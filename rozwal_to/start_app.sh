@@ -6,7 +6,6 @@ USE=$1
 
 if [[ "$USE" == "app" ]]; then
 	while ! nc -w 1 --send-only ${DB_HOST} ${DB_PORT} < /dev/null; do sleep 3; done;
-	python3 ${HOME}/manage.py makemigrations score
 	python3 ${HOME}/manage.py migrate
 	python3 ${HOME}/manage.py collectstatic --noinput
 	cd root
