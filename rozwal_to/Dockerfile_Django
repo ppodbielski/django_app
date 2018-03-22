@@ -35,8 +35,8 @@ RUN yum -y update ;\
 RUN easy_install-3.4 pip
 
 # Prepare env
-RUN pip3 install -r root/requirements.txt
 ADD requirements.txt michal_site start_app.sh root/
+RUN pip3 install -r root/requirements.txt
 
 #Additional configuration
 EXPOSE 8000
