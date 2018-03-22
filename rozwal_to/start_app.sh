@@ -6,9 +6,8 @@ USE=$1
 
 if [[ "$USE" == "app" ]]; then
 	while ! nc -w 1 --send-only ${DB_HOST} ${DB_PORT} < /dev/null; do sleep 3; done;
-	python3 ${HOME}/manage.py migrate
-	python3 ${HOME}/manage.py collectstatic --noinput
-	cd root
+	python3 manage.py migrate
+	python3 manage.py collectstatic --noinput
 	/bin/bash
 	gunicorn --bind 0.0.0.0:8000 michal_site.wsgi
 fi

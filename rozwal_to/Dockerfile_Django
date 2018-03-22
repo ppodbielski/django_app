@@ -41,4 +41,8 @@ RUN pip3 install -r root/requirements.txt
 #Additional configuration
 EXPOSE 8000
 
-ENTRYPOINT ["./root/start_app.sh"]
+WORKDIR /root
+
+ENTRYPOINT ["./start_app.sh"]
+
+#CMD ["/bin/bash"]
