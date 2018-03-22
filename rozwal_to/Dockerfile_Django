@@ -2,7 +2,6 @@ FROM centos:centos7
 
 # Install essential
 
-
 ARG DB_PASSWORD='postgres'
 ARG DB_USER='postgres'
 ARG DB_NAME='michal_site'
@@ -36,11 +35,10 @@ RUN yum -y update ;\
 RUN easy_install-3.4 pip
 
 # Prepare env
-ADD requirements.txt michal_site start_app.sh root/
 RUN pip3 install -r root/requirements.txt
+ADD requirements.txt michal_site start_app.sh root/
 
 #Additional configuration
 EXPOSE 8000
 
 ENTRYPOINT ["./root/start_app.sh"]
-CMD []
