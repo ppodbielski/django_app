@@ -18,7 +18,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Django_Server
+      dockerfile: Dockerfile_Django
     image: ${APP_IMAGE}
     container_name: ${APP_NAME}
     command: ${APP_RUN}
@@ -30,7 +30,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: Nginx
+      dockerfile: Dockerfile_Nginx
     image : ${NGINX_IMAGE}
     container_name: ${NGINX_NAME}
     ports:
