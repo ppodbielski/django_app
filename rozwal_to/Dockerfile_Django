@@ -30,19 +30,14 @@ RUN yum -y update ;\
     yum -y install python36 \
     python34-setuptools \
     nc \
-    yum clean all
-
+    yum clean all 
 RUN easy_install-3.4 pip
 
-# Prepare env
 ADD requirements.txt michal_site start_app.sh root/
 RUN pip3 install -r root/requirements.txt
+RUN ln -fs /usr/bin/python3 /usr/bin/python
 
-#Additional configuration
 EXPOSE 8000
-
 WORKDIR /root
 
 ENTRYPOINT ["./start_app.sh"]
-
-#CMD ["/bin/bash"]
