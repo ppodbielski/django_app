@@ -34,7 +34,6 @@ RUN yum -y update ;\
 RUN easy_install-3.4 pip
 
 ADD root /root
-RUN ls root
 RUN pip3 install -r root/requirements.txt
 RUN ln -fs /usr/bin/python3 /usr/bin/python
 
