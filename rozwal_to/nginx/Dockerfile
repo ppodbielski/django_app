@@ -1,3 +1,3 @@
 FROM nginx:1.13
-ADD nginx.conf /etc/nginx/nginx.conf
+ADD etc /etc
 RUN mkdir -p /var/www/static

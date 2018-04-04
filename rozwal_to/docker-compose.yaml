@@ -17,20 +17,18 @@ services:
   
   web:
     build:
-      context: .
-      dockerfile: Dockerfile_Django
+      context: ./app
     image: ${APP_IMAGE}
     container_name: ${APP_NAME}
     command: ${APP_RUN}
     depends_on:
       - db
     volumes:
-      - ./static:/root/collected_static 
+      - ./static:/root/michal_site/collected_static 
 
   nginx:
     build:
-      context: .
-      dockerfile: Dockerfile_Nginx
+      context: ./nginx
     image : ${NGINX_IMAGE}
     container_name: ${NGINX_NAME}
     ports:
