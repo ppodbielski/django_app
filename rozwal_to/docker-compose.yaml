@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./static:/root/michal_site/collected_static 
+      - ./static:/root/collected_static 
 
   nginx:
     build:

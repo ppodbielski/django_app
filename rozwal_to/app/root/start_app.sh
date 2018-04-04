@@ -5,7 +5,6 @@ USE=$1
 
 if [[ "$USE" == "app" ]]; then
 	while ! nc -w 1 --send-only ${DB_HOST} ${DB_PORT} < /dev/null; do sleep 3; done;
-	cd michal_site
 	python manage.py migrate
 	python manage.py collectstatic --noinput
 	/bin/bash
@@ -13,12 +12,10 @@ if [[ "$USE" == "app" ]]; then
 
 elif [[ $USE == "worker" ]]; then
 	while ! nc -w 1 --send-only ${RABBIT_HOST} ${RABBIT_PORT} < /dev/null; do sleep 3; done;
-	cd michal_site
 	celery -A michal_site.celery worker -Q rozwal_to --loglevel=info
 
 elif [[ "$USE" == "beat" ]]; then
         while ! nc -w 1 --send-only ${RABBIT_HOST} ${RABBIT_PORT} < /dev/null; do sleep 3; done;
-	cd michal_site
 	celery -A michal_site.celery beat --loglevel=info
 
 else 
