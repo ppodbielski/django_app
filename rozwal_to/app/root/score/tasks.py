@@ -3,7 +3,8 @@ from michal_site.celery import app
 from .models import User
 
 PATTERN = 'pkt'
-URL = 'https://rozwal.to/profile/{}’
+URL = 'https://rozwal.to/profile/{}'
+
 
 @app.task()
 def get_page_score():

@@ -3,7 +3,6 @@ from .models import User
 from django.test import Client
 
 
-
 class UserTestCase(unittest.TestCase):
 
     def setUp(self):

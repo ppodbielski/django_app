@@ -4,7 +4,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '5v$#77gkhajv5vsbwz)0oh_o4$(kdscp3s%3jny*_divmvc_v8'
 
-
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
@@ -52,11 +51,11 @@ WSGI_APPLICATION = 'michal_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME',''),
-        'USER': os.environ.get('DB_USER',''),
-        'PASSWORD': os.environ.get('DB_PASSWORD',''),
-        'HOST': os.environ.get('DB_HOST',''),
-        'PORT': os.environ.get('DB_PORT',''),
+        'NAME': os.environ.get('DB_NAME', ''),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', ''),
+        'PORT': os.environ.get('DB_PORT', ''),
     }
 }
 
@@ -74,31 +73,27 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Warsaw'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-
 STATIC_URL = '/static/'
 STATIC_ROOT = 'collected_static'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
-BROKER_URL = 'amqp://' + os.environ.get('RABBIT_NAME','') + ':' + os.environ.get('RABBIT_PASSWORD','') + '@rabbit:' + os.environ.get('RABBIT_PORT','') + '//'
+BROKER_URL = 'amqp://{name}:{password}@rabbit:{port}//'.format(name=os.environ.get('RABBIT_NAME', ''),
+                                                               password=os.environ.get('RABBIT_PASSWORD', ''),
+                                                               port=os.environ.get('RABBIT_PORT', ''))
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Warsaw'
-
 CELERY_DEFAULT_QUEUE = 'rozwal_toen'
 CELERY_DEFAULT_EXCHANGE = 'rozwal_to'
 CELERY_DEFAULT_ROUTING_KEY = 'rozwal_to'
-
 CELERYBEAT_SCHEDULE = {
     'task-test': {
         'task': 'score.tasks.get_page_score',
